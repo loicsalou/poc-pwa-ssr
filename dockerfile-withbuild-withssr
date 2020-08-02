@@ -1,0 +1,23 @@
+FROM node:13.10.1 AS build
+
+### BUILD DE L'APP en mode SSR
+RUN mkdir /app
+COPY ./package.json ./package-lock.json /app/
+WORKDIR /app
+RUN npm ci
+COPY ./ /app/
+# this will build the browser and server files:
+RUN npm run build:ssr
+
+### DEPLOIEMENT DE LA PARTIE PAGES DANS NGINX (LA PARTIE SANS SSR DONC)
+FROM nginx:1.16.1 AS frontend-browser
+COPY --from=build /app/dist/ecdc-web-ui/browser/ /usr/share/nginx/html
+COPY ./conf/nginx.conf /etc/nginx/conf.d/default.conf
+
+### DEPLOIEMENT DE LA PARTIE SSR DANS NODEJS de NGINX
+FROM node:13.10.1-alpine AS ssr-server
+COPY --from=build /app/dist /app/dist/
+COPY ./package.json /app/package.json
+WORKDIR /app
+EXPOSE 4000
+CMD npm run serve:ssr
