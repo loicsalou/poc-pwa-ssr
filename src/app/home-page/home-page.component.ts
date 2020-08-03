@@ -28,7 +28,8 @@ export class HomePageComponent implements OnInit {
         tap(items => {
           const platform = isPlatformBrowser(this.platformId) ?
             'in the browser' : 'on the server';
-          console.log(`getUsers : Running ${platform} with appId=${this.appId}`);
+          const date = new Date();
+          console.log(`${date}: getUsers : Running ${platform} with appId=${this.appId}`);
         })
       ).subscribe(items => {
                     this.items = items;
