@@ -12,7 +12,7 @@ export class AfDomainComponent implements OnInit {
   items: any;
 
   constructor(private itemsService: ItemsService,
-              @Inject(PLATFORM_ID) private platformId: Object,
+              @Inject(PLATFORM_ID) private platformId: any,
               @Inject(APP_ID) private appId: string) {
   }
 

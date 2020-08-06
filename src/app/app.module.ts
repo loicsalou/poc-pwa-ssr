@@ -1,11 +1,13 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NotFoundComponent} from './shared/not-found/not-found.component';
 import {HomePageComponent} from './home-page/home-page.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {multiTranslateLoader, ObHttpApiInterceptor, ObMasterLayoutModule} from '@oblique/oblique';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
             declarations: [
@@ -14,11 +16,15 @@ import {HttpClientModule} from '@angular/common/http';
               HomePageComponent
             ],
             imports: [
-              BrowserModule.withServerTransition({appId: 'ecdc-web-ui'}),
+              BrowserAnimationsModule,
               AppRoutingModule,
-              HttpClientModule
+              HttpClientModule,
+              ObMasterLayoutModule,
+              TranslateModule.forRoot(multiTranslateLoader())
             ],
-            providers: [],
+            providers: [
+              {provide: HTTP_INTERCEPTORS, useClass: ObHttpApiInterceptor, multi: true}
+            ],
             bootstrap: [AppComponent]
           })
 export class AppModule {

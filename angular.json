@@ -26,9 +26,16 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@oblique/oblique/styles",
+                "output": "assets/styles"
+              }
             ],
             "styles": [
+              "node_modules/@oblique/oblique/styles/css/oblique-core.css",
+              "node_modules/@oblique/oblique/styles/css/oblique-material.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -84,21 +91,18 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": []
+            "configPath": "../tests/jest.config.js",
+            "watch": true,
+            "verbose": true
+          },
+          "configurations": {
+            "production": {
+              "configPath": "../tests/jest.config.js",
+              "watch": false,
+              "verbose": false
+            }
           }
         },
         "lint": {
