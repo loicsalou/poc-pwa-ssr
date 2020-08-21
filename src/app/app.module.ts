@@ -9,7 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 // import {multiTranslateLoader} from '@oblique/oblique';
 // import {TranslateModule} from '@ngx-translate/core';
 
-// import {ObMasterLayoutModule} from '@oblique/oblique';
+import {ObMasterLayoutModule} from '@oblique/oblique';
 
 @NgModule({
             declarations: [
@@ -21,7 +21,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
               BrowserAnimationsModule,
               AppRoutingModule,
               HttpClientModule,
-              //  ObMasterLayoutModule,
+               ObMasterLayoutModule,
               // TranslateModule.forRoot(multiTranslateLoader())
             ],
             bootstrap: [AppComponent]

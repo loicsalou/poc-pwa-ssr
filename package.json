@@ -14,7 +14,7 @@
     "docker:run": "docker run -d -p4000:4000 --name ecdc-front ecdc-web-ui:latest",
     "docker:lighthouse": "docker run -itv /tmp/reports:/home/chrome/reports --cap-add=SYS_ADMIN loicsalou/lighthouse:latest",
     "dev:ssr": "ng run ecdc-web-ui:serve-ssr",
-    "serve:ssr": "node dist/ecdc-web-ui/server/main.js",
+    "serve:ssr": "npm config set proxy=http://proxy-bvcol.admin.ch:8080/ && npm config set https_proxy=http://proxy-bvcol.admin.ch:8080/ && node dist/ecdc-web-ui/server/main.js",
     "build:ssr": "ng build --prod && ng run ecdc-web-ui:server:production",
     "prerender": "ng run ecdc-web-ui:prerender"
   },
@@ -33,7 +33,7 @@
     "@angular/service-worker": "~10.0.5",
     "@nguniversal/express-engine": "~10.0.1",
     "@ngx-translate/core": "13.0.0",
-    "@oblique/oblique": "5.0.5",
+    "@oblique/oblique": "5.1.0-RC.3",
     "@ts-morph/common": "0.5.2",
     "ajv": "6.12.3",
     "core-js": "^2.0.0",
